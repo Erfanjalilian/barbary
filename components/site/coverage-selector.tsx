@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { ArrowDown, ArrowLeft, ArrowRight, ArrowUp, MapPin, Search } from "lucide-react";
+import { ArrowDown, ArrowLeft, ArrowRight, ArrowUp, MapPin, Search, X } from "lucide-react";
 import provinces from "@/data/iran-cities.json";
 import { getCoveragePhone } from "@/lib/coverage-phones";
 
@@ -42,6 +42,7 @@ export function CoverageSelector({ variant = "dropdown", className = "", phone }
   const filteredCities = currentProvince?.cities.filter((city) =>
     city.includes(search.trim()),
   ) ?? [];
+
   function selectProvince(name: string) {
     setSelectedProvince(name);
     setSelectedCity(null);
@@ -83,16 +84,28 @@ export function CoverageSelector({ variant = "dropdown", className = "", phone }
                 : "یک استان را برای مشاهده شهرهای آن انتخاب کنید."}
           </p>
         </div>
-        {(selectedProvince || selectedCity) && (
-          <button
-            type="button"
-            onClick={goBack}
-            className="inline-flex shrink-0 items-center gap-2 rounded-xl border border-slate-200 px-3 py-2 text-sm font-bold text-slate-600 transition hover:border-orange-300 hover:text-orange-600"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            بازگشت
-          </button>
-        )}
+        <div className="flex shrink-0 items-center gap-2">
+          {(selectedProvince || selectedCity) && (
+            <button
+              type="button"
+              onClick={goBack}
+              className="inline-flex items-center gap-2 rounded-xl border border-slate-200 px-3 py-2 text-sm font-bold text-slate-600 transition hover:border-orange-300 hover:text-orange-600"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              بازگشت
+            </button>
+          )}
+          {variant === "dropdown" && (
+            <button
+              type="button"
+              onClick={() => setIsOpen(false)}
+              aria-label="بستن فهرست مناطق تحت پوشش"
+              className="rounded-xl border border-slate-200 p-2 text-slate-500 transition hover:border-orange-300 hover:text-orange-600"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          )}
+        </div>
       </div>
 
       {!selectedCity && (
@@ -181,17 +194,17 @@ export function CoverageSelector({ variant = "dropdown", className = "", phone }
   }
 
   return (
-    <div
-      className={`relative ${className}`}
-      onMouseEnter={() => setIsOpen(true)}
-      onMouseLeave={() => setIsOpen(false)}
-      onFocus={() => setIsOpen(true)}
-      onBlur={() => setIsOpen(false)}
-    >
+    <div className={`relative ${className}`}>
       <button
         type="button"
         aria-expanded={isOpen}
+        aria-haspopup="true"
         onClick={() => setIsOpen((open) => !open)}
+        onMouseEnter={() => {
+          if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+            setIsOpen(true);
+          }
+        }}
         className="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-right text-sm font-medium text-slate-700 transition hover:bg-slate-100 hover:text-orange-600 lg:w-auto lg:px-0 lg:py-0"
       >
         <span>مناطق تحت پوشش</span>
