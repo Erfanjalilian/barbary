@@ -29,7 +29,7 @@ export default async function HomePage() {
               </h1>
               <p className="mt-5 max-w-xl text-lg leading-8 text-white/85">{data.settings.heroDescription}</p>
               <div className="mt-8 flex flex-wrap gap-4">
-                <a href={`tel:${data.settings.phone}`} className="inline-flex items-center gap-2 rounded-full bg-orange-500 px-6 py-3.5 text-base font-bold text-white shadow-lg shadow-orange-950/30 transition hover:bg-orange-600">
+                <a href="tel:02188281009" className="inline-flex items-center gap-2 rounded-full bg-orange-500 px-6 py-3.5 text-base font-bold text-white shadow-lg shadow-orange-950/30 transition hover:bg-orange-600">
                   <PhoneCall className="h-5 w-5" />
                   {data.settings.ctaText}
                 </a>
@@ -39,6 +39,10 @@ export default async function HomePage() {
                 </a>
               </div>
               <div className="mt-8 flex flex-wrap items-center gap-5 text-sm text-white/85">
+                <a href="tel:02188281009" className="flex items-center gap-2 font-bold text-orange-200 transition hover:text-orange-100">
+                  <PhoneCall className="h-5 w-5 text-orange-300" />
+                  خط ویژه ۱۰۰۹
+                </a>
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="h-5 w-5 text-emerald-300" />
                   بیمه و اطمینان

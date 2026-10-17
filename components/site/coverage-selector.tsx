@@ -2,15 +2,62 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { ArrowDown, ArrowLeft, ArrowRight, ArrowUp, MapPin, Search, X } from "lucide-react";
-import provinces from "@/data/iran-cities.json";
-import { getCoveragePhone } from "@/lib/coverage-phones";
+import { ArrowDown, ArrowLeft, MapPin, Phone, Search, X } from "lucide-react";
+import { GILAN_PHONE, getCoveragePhone, type TehranBranchDirection } from "@/lib/coverage-phones";
 
 type CoverageSelectorProps = {
   variant?: "dropdown" | "page";
   className?: string;
   phone: string;
 };
+
+const tehranAreas: {
+  label: string;
+  direction: TehranBranchDirection;
+  neighborhoods: string[];
+}[] = [
+  {
+    label: "شمال تهران",
+    direction: "شمال",
+    neighborhoods: [
+      "تجریش", "نیاوران", "قیطریه", "فرمانیه", "ولنجک", "زعفرانیه", "الهیه",
+      "اقدسیه", "دارآباد", "دزاشیب", "جماران", "کامرانیه", "آجودانیه",
+      "فرشته", "اوین", "درکه", "سوهانک", "ازگل", "چیذر", "دربند",
+      "محمودیه", "اختیاریه", "نوبنیاد",
+    ],
+  },
+  {
+    label: "مرکز تهران",
+    direction: "مرکز",
+    neighborhoods: [
+      "یوسف‌آباد", "امیرآباد", "فاطمی", "عباس‌آباد", "سهروردی", "بهجت‌آباد",
+      "آرژانتین", "ولیعصر", "انقلاب", "فلسطین", "فردوسی", "جمهوری",
+      "هفت‌تیر", "سنایی", "ایرانشهر", "باغ سپهسالار", "منیریه",
+      "گاندی", "میدان ولیعصر", "طالقانی", "بهار", "کریم‌خان",
+    ],
+  },
+  {
+    label: "غرب تهران",
+    direction: "غرب",
+    neighborhoods: [
+      "صادقیه", "جنت‌آباد شمالی", "جنت‌آباد مرکزی", "جنت‌آباد جنوبی", "پونک",
+      "شهران", "بلوار فردوس", "اکباتان", "تهرانسر", "چیتگر", "وردآورد",
+      "باغ فیض", "مرزداران", "ستارخان", "طرشت", "آزادی", "سازمان برنامه",
+      "دهکده المپیک", "شهرک غرب", "آیت‌الله کاشانی", "شهرزیبا", "کن",
+      "شاهین", "سیمون بولیوار",
+    ],
+  },
+  {
+    label: "جنوب تهران",
+    direction: "جنوب",
+    neighborhoods: [
+      "نازی‌آباد", "جوادیه", "خزانه", "شهرری", "شوش", "مولوی", "افسریه",
+      "کیانشهر", "یافت‌آباد", "عبدل‌آباد", "خانی‌آباد نو", "دولت‌آباد",
+      "شهرک ولیعصر", "امامزاده حسن", "بازار", "تهران‌نو", "بریانک",
+      "منطقه ۱۷", "منطقه ۱۹", "نعمت‌آباد", "مشیریه", "آذری",
+    ],
+  },
+];
 
 function toTelephoneHref(phone: string) {
   const normalized = phone
@@ -21,40 +68,18 @@ function toTelephoneHref(phone: string) {
   return `tel:${normalized}`;
 }
 
-const directions = [
-  { name: "شمال", Icon: ArrowUp },
-  { name: "جنوب", Icon: ArrowDown },
-  { name: "شرق", Icon: ArrowRight },
-  { name: "غرب", Icon: ArrowLeft },
-  { name: "مرکز", Icon: MapPin },
-] as const;
-
 export function CoverageSelector({ variant = "dropdown", className = "", phone }: CoverageSelectorProps) {
   const [isOpen, setIsOpen] = useState(variant === "page");
-  const [selectedProvince, setSelectedProvince] = useState<string | null>(null);
-  const [selectedCity, setSelectedCity] = useState<string | null>(null);
+  const [selectedArea, setSelectedArea] = useState<string | null>(null);
   const [search, setSearch] = useState("");
 
-  const currentProvince = provinces.find((province) => province.name === selectedProvince);
-  const filteredProvinces = provinces.filter((province) =>
-    province.name.includes(search.trim()),
-  );
-  const filteredCities = currentProvince?.cities.filter((city) =>
-    city.includes(search.trim()),
+  const selectedTehranArea = tehranAreas.find((area) => area.label === selectedArea);
+  const filteredNeighborhoods = selectedTehranArea?.neighborhoods.filter((neighborhood) =>
+    neighborhood.includes(search.trim()),
   ) ?? [];
 
-  function selectProvince(name: string) {
-    setSelectedProvince(name);
-    setSelectedCity(null);
-    setSearch("");
-  }
-
   function goBack() {
-    if (selectedCity) {
-      setSelectedCity(null);
-    } else {
-      setSelectedProvince(null);
-    }
+    setSelectedArea(null);
     setSearch("");
   }
 
@@ -69,23 +94,17 @@ export function CoverageSelector({ variant = "dropdown", className = "", phone }
     >
       <div className="flex items-start justify-between gap-4">
         <div>
-          <h2 className="text-lg font-black text-slate-900">
-            {selectedCity
-              ? `مناطق ${selectedCity}`
-              : selectedProvince
-                ? `شهرهای استان ${selectedProvince}`
-                : "استان‌های ایران"}
-          </h2>
+          <h2 className="text-lg font-black text-slate-900">{selectedArea ?? "مناطق تحت پوشش"}</h2>
           <p className="mt-1 text-sm text-slate-500">
-            {selectedCity
-              ? "جهت موردنظر در این شهر را انتخاب کنید."
-              : selectedProvince
-                ? "برای مشاهده نواحی شهر، نام شهر را انتخاب کنید."
-                : "یک استان را برای مشاهده شهرهای آن انتخاب کنید."}
+            {selectedTehranArea
+              ? "محله‌های این محدوده را انتخاب کنید."
+              : selectedArea === "گیلان"
+                ? "برای تماس با گیلان از شمارهٔ زیر استفاده کنید."
+                : "یکی از مناطق زیر را برای مشاهدهٔ جزئیات انتخاب کنید."}
           </p>
         </div>
         <div className="flex shrink-0 items-center gap-2">
-          {(selectedProvince || selectedCity) && (
+          {selectedArea && (
             <button
               type="button"
               onClick={goBack}
@@ -108,73 +127,73 @@ export function CoverageSelector({ variant = "dropdown", className = "", phone }
         </div>
       </div>
 
-      {!selectedCity && (
-        <label className="mt-5 flex items-center gap-2 rounded-2xl border border-slate-200 bg-slate-50 px-4 focus-within:border-orange-400">
-          <Search className="h-4 w-4 shrink-0 text-slate-400" />
-          <span className="sr-only">{selectedProvince ? "جست‌وجوی شهر" : "جست‌وجوی استان"}</span>
-          <input
-            type="search"
-            value={search}
-            onChange={(event) => setSearch(event.target.value)}
-            placeholder={selectedProvince ? "جست‌وجوی شهر..." : "جست‌وجوی استان..."}
-            className="w-full bg-transparent py-3 text-sm outline-none placeholder:text-slate-400"
-          />
-        </label>
-      )}
-
-      {!selectedProvince && (
-        <div className="mt-5 grid max-h-[55vh] grid-cols-2 gap-2 overflow-y-auto sm:grid-cols-3">
-          {filteredProvinces.map((province) => (
+      {!selectedArea && (
+        <div className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-3">
+          {tehranAreas.map((area) => (
             <button
-              key={province.name}
+              key={area.label}
               type="button"
-              onClick={() => selectProvince(province.name)}
+              onClick={() => setSelectedArea(area.label)}
               className="rounded-xl border border-slate-200 px-3 py-3 text-right text-sm font-bold text-slate-700 transition hover:border-orange-300 hover:bg-orange-50 hover:text-orange-700"
             >
-              {province.name}
+              {area.label}
             </button>
           ))}
-          {filteredProvinces.length === 0 && (
-            <p className="col-span-full py-6 text-center text-sm text-slate-500">استانی پیدا نشد.</p>
-          )}
+          <button
+            type="button"
+            onClick={() => setSelectedArea("گیلان")}
+            className="rounded-xl border border-slate-200 px-3 py-3 text-right text-sm font-bold text-slate-700 transition hover:border-orange-300 hover:bg-orange-50 hover:text-orange-700"
+          >
+            گیلان
+          </button>
         </div>
       )}
 
-      {selectedProvince && !selectedCity && (
-        <div className="mt-5 grid max-h-[55vh] grid-cols-2 gap-2 overflow-y-auto sm:grid-cols-3">
-          {filteredCities.map((city) => (
-            <button
-              key={city}
-              type="button"
-              onClick={() => {
-                setSelectedCity(city);
-                setSearch("");
-              }}
-              className="rounded-xl border border-slate-200 px-3 py-3 text-right text-sm font-bold text-slate-700 transition hover:border-orange-300 hover:bg-orange-50 hover:text-orange-700"
-            >
-              {city}
-            </button>
-          ))}
-          {filteredCities.length === 0 && (
-            <p className="col-span-full py-6 text-center text-sm text-slate-500">شهری پیدا نشد.</p>
-          )}
-        </div>
+      {selectedTehranArea && (
+        <>
+          <label className="mt-5 flex items-center gap-2 rounded-2xl border border-slate-200 bg-slate-50 px-4 focus-within:border-orange-400">
+            <Search className="h-4 w-4 shrink-0 text-slate-400" />
+            <span className="sr-only">جست‌وجوی محله</span>
+            <input
+              type="search"
+              value={search}
+              onChange={(event) => setSearch(event.target.value)}
+              placeholder="جست‌وجوی محله..."
+              className="w-full bg-transparent py-3 text-sm outline-none placeholder:text-slate-400"
+            />
+          </label>
+          <div className="mt-5 grid max-h-[55vh] grid-cols-2 gap-2 overflow-y-auto sm:grid-cols-3">
+            {filteredNeighborhoods.map((neighborhood) => (
+              <div
+                key={neighborhood}
+                className="flex items-center gap-2 rounded-xl border border-slate-200 px-3 py-3 text-sm font-bold text-slate-700"
+              >
+                <MapPin className="h-4 w-4 shrink-0 text-orange-500" />
+                <span>{neighborhood}</span>
+              </div>
+            ))}
+            {filteredNeighborhoods.length === 0 && (
+              <p className="col-span-full py-6 text-center text-sm text-slate-500">محله‌ای پیدا نشد.</p>
+            )}
+          </div>
+          <a
+            href={toTelephoneHref(getCoveragePhone("تهران", selectedTehranArea.direction, phone))}
+            className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-orange-500 px-4 py-3 text-sm font-bold text-white transition hover:bg-orange-600"
+          >
+            <Phone className="h-4 w-4" />
+            تماس با {selectedTehranArea.label}
+          </a>
+        </>
       )}
 
-      {selectedCity && (
-        <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
-          {directions.map(({ name, Icon }) => (
-            <a
-              key={name}
-              href={toTelephoneHref(getCoveragePhone(selectedCity, name, phone))}
-              aria-label={`تماس با ${name} ${selectedCity}`}
-              className="flex flex-col items-center gap-2 rounded-2xl border border-orange-100 bg-orange-50/70 px-3 py-5 text-center transition hover:border-orange-300 hover:bg-orange-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
-            >
-              <Icon className="h-5 w-5 text-orange-500" />
-              <span className="text-sm font-bold text-slate-800">{name} {selectedCity}</span>
-            </a>
-          ))}
-        </div>
+      {selectedArea === "گیلان" && (
+        <a
+          href={toTelephoneHref(GILAN_PHONE)}
+          className="mt-5 flex items-center justify-center gap-2 rounded-xl bg-orange-500 px-4 py-3 text-sm font-bold text-white transition hover:bg-orange-600"
+        >
+          <Phone className="h-4 w-4" />
+          تماس با گیلان: {GILAN_PHONE}
+        </a>
       )}
 
       {variant === "dropdown" && (

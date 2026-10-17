@@ -1,4 +1,4 @@
-import { SiteHeader, SiteFooter, SectionHeading, CoverageGrid } from "@/components/site/layout";
+import { SiteHeader, SiteFooter, SectionHeading } from "@/components/site/layout";
 import { CoverageSelector } from "@/components/site/coverage-selector";
 import { getPublicData } from "@/lib/site-data";
 
@@ -12,15 +12,9 @@ export default async function CoveragePage() {
       <SiteHeader settings={data.settings} />
       <main className="bg-slate-50">
         <section className="mx-auto max-w-7xl px-4 py-12 lg:px-8">
-          <SectionHeading title="مناطق تحت پوشش" description="استان را انتخاب کنید، شهرهای آن را ببینید و ناحیهٔ موردنظر را مشخص کنید." />
+          <SectionHeading title="مناطق تحت پوشش" description="یکی از محدوده‌های تهران را برای دیدن محله‌های آن انتخاب کنید یا برای تماس با گیلان شمارهٔ مربوط را ببینید." />
           <div className="mt-10">
             <CoverageSelector variant="page" phone={data.settings.phone} />
-          </div>
-          <div className="mt-10">
-            <SectionHeading title="محدوده‌های خدمات فعلی" description="مناطق ثبت‌شده برای خدمات فعلی ما." />
-          </div>
-          <div className="mt-6">
-            <CoverageGrid areas={data.coverageAreas} />
           </div>
         </section>
       </main>

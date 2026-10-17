@@ -1,5 +1,7 @@
 export type TehranBranchDirection = "شمال" | "جنوب" | "شرق" | "غرب" | "مرکز";
 
+export const GILAN_PHONE = "09115742824";
+
 const tehranBranchPhones: Partial<Record<TehranBranchDirection, string>> = {
   شمال: "02126210683",
   جنوب: "02634200766",

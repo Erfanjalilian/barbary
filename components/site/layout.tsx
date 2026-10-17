@@ -2,7 +2,7 @@ import Link from "next/link";
 import { MapPinned, Phone, PhoneCall, ShieldCheck, Sparkles } from "lucide-react";
 import type { SiteSettings, ServiceItem, AdvantageItem, PortfolioItem, CoverageArea } from "@/types/site";
 import { CoverageSelector } from "@/components/site/coverage-selector";
-import { getCoveragePhone } from "@/lib/coverage-phones";
+import { GILAN_PHONE, getCoveragePhone } from "@/lib/coverage-phones";
 
 export function SiteHeader({ settings }: { settings: SiteSettings }) {
   const nav = [
@@ -39,7 +39,7 @@ export function SiteHeader({ settings }: { settings: SiteSettings }) {
         </nav>
 
         <div className="hidden items-center gap-4 lg:flex">
-          <a href={`tel:${settings.phone}`} className="text-sm font-medium text-slate-700">{settings.phone}</a>
+          <a href={`tel:${GILAN_PHONE}`} className="text-sm font-medium text-slate-700">0911 574 2824</a>
           <Link href="/contact" className="rounded-full bg-orange-500 px-5 py-2.5 text-sm font-bold text-white shadow-md shadow-orange-200 transition hover:bg-orange-600">
             تماس با ما
           </Link>
@@ -60,8 +60,8 @@ export function SiteHeader({ settings }: { settings: SiteSettings }) {
                   </Link>
                 )
               ))}
-              <a href={`tel:${settings.phone}`} className="mt-2 block rounded-xl bg-orange-500 px-3 py-2 text-center text-sm font-bold text-white">
-                تماس فوری
+              <a href={`tel:${GILAN_PHONE}`} className="mt-2 block rounded-xl bg-orange-500 px-3 py-2 text-center text-sm font-bold text-white">
+                تماس فوری: 0911 574 2824
               </a>
             </div>
           </details>
@@ -142,7 +142,12 @@ export function PortfolioCard({ item }: { item: PortfolioItem }) {
 }
 
 export function SiteFooter({ settings }: { settings: SiteSettings }) {
-  const branches = ["شمال", "جنوب", "شرق", "غرب", "مرکز"] as const;
+  const quickContacts = [
+    { label: "مرکز تهران", phone: getCoveragePhone("تهران", "مرکز", settings.phone) },
+    { label: "شمال تهران", phone: getCoveragePhone("تهران", "شمال", settings.phone) },
+    { label: "جنوب تهران", phone: getCoveragePhone("تهران", "جنوب", settings.phone) },
+    { label: "گیلان", phone: GILAN_PHONE },
+  ];
 
   return (
     <>
@@ -175,19 +180,19 @@ export function SiteFooter({ settings }: { settings: SiteSettings }) {
         </div>
       </footer>
       <nav
-        aria-label="تماس با شعب تهران"
-        className="fixed inset-x-0 bottom-0 z-50 grid grid-cols-5 border-t border-slate-200 bg-white/95 px-1 pt-2 shadow-[0_-8px_24px_rgba(15,23,42,0.12)] backdrop-blur lg:hidden"
+        aria-label="تماس با مناطق"
+        className="fixed inset-x-0 bottom-0 z-50 grid grid-cols-4 border-t border-slate-200 bg-white/95 px-1 pt-2 shadow-[0_-8px_24px_rgba(15,23,42,0.12)] backdrop-blur lg:hidden"
         style={{ paddingBottom: "max(0.5rem, env(safe-area-inset-bottom))" }}
       >
-        {branches.map((branch) => (
+        {quickContacts.map(({ label, phone }) => (
           <a
-            key={branch}
-            href={`tel:${getCoveragePhone("تهران", branch, settings.phone)}`}
-            aria-label={`تماس با شعبه ${branch} تهران`}
+            key={label}
+            href={`tel:${phone}`}
+            aria-label={`تماس با ${label}`}
             className="flex min-w-0 flex-col items-center justify-center gap-1 rounded-lg px-0.5 py-1 text-center text-[10px] font-bold leading-tight text-slate-700 transition hover:text-orange-600 focus-visible:outline-2 focus-visible:outline-orange-500"
           >
             <PhoneCall className="h-4 w-4 shrink-0 text-orange-500" />
-            <span>شعبه {branch} تهران</span>
+            <span>{label}</span>
           </a>
         ))}
       </nav>
