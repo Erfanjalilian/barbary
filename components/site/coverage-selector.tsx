@@ -3,61 +3,14 @@
 import Link from "next/link";
 import { useState } from "react";
 import { ArrowDown, ArrowLeft, MapPin, Phone, Search, X } from "lucide-react";
-import { GILAN_PHONE, getCoveragePhone, type TehranBranchDirection } from "@/lib/coverage-phones";
+import { GILAN_PHONE, getCoveragePhone } from "@/lib/coverage-phones";
+import { tehranAreas } from "@/lib/tehran-areas";
 
 type CoverageSelectorProps = {
-  variant?: "dropdown" | "page";
+  variant?: "dropdown" | "mobile" | "page";
   className?: string;
   phone: string;
 };
-
-const tehranAreas: {
-  label: string;
-  direction: TehranBranchDirection;
-  neighborhoods: string[];
-}[] = [
-  {
-    label: "شمال تهران",
-    direction: "شمال",
-    neighborhoods: [
-      "تجریش", "نیاوران", "قیطریه", "فرمانیه", "ولنجک", "زعفرانیه", "الهیه",
-      "اقدسیه", "دارآباد", "دزاشیب", "جماران", "کامرانیه", "آجودانیه",
-      "فرشته", "اوین", "درکه", "سوهانک", "ازگل", "چیذر", "دربند",
-      "محمودیه", "اختیاریه", "نوبنیاد",
-    ],
-  },
-  {
-    label: "مرکز تهران",
-    direction: "مرکز",
-    neighborhoods: [
-      "یوسف‌آباد", "امیرآباد", "فاطمی", "عباس‌آباد", "سهروردی", "بهجت‌آباد",
-      "آرژانتین", "ولیعصر", "انقلاب", "فلسطین", "فردوسی", "جمهوری",
-      "هفت‌تیر", "سنایی", "ایرانشهر", "باغ سپهسالار", "منیریه",
-      "گاندی", "میدان ولیعصر", "طالقانی", "بهار", "کریم‌خان",
-    ],
-  },
-  {
-    label: "غرب تهران",
-    direction: "غرب",
-    neighborhoods: [
-      "صادقیه", "جنت‌آباد شمالی", "جنت‌آباد مرکزی", "جنت‌آباد جنوبی", "پونک",
-      "شهران", "بلوار فردوس", "اکباتان", "تهرانسر", "چیتگر", "وردآورد",
-      "باغ فیض", "مرزداران", "ستارخان", "طرشت", "آزادی", "سازمان برنامه",
-      "دهکده المپیک", "شهرک غرب", "آیت‌الله کاشانی", "شهرزیبا", "کن",
-      "شاهین", "سیمون بولیوار",
-    ],
-  },
-  {
-    label: "جنوب تهران",
-    direction: "جنوب",
-    neighborhoods: [
-      "نازی‌آباد", "جوادیه", "خزانه", "شهرری", "شوش", "مولوی", "افسریه",
-      "کیانشهر", "یافت‌آباد", "عبدل‌آباد", "خانی‌آباد نو", "دولت‌آباد",
-      "شهرک ولیعصر", "امامزاده حسن", "بازار", "تهران‌نو", "بریانک",
-      "منطقه ۱۷", "منطقه ۱۹", "نعمت‌آباد", "مشیریه", "آذری",
-    ],
-  },
-];
 
 function toTelephoneHref(phone: string) {
   const normalized = phone
@@ -81,6 +34,107 @@ export function CoverageSelector({ variant = "dropdown", className = "", phone }
   function goBack() {
     setSelectedArea(null);
     setSearch("");
+  }
+
+  if (variant === "mobile") {
+    return (
+      <div className={`w-full border-b border-slate-100 ${className}`} dir="rtl">
+        <button
+          type="button"
+          aria-expanded={isOpen}
+          onClick={() => {
+            setIsOpen((open) => !open);
+            goBack();
+          }}
+          className="flex w-full items-center justify-between px-3 py-3 text-right text-sm font-medium text-slate-700 transition hover:bg-orange-50 hover:text-orange-600"
+        >
+          <span>مناطق تحت پوشش</span>
+          <ArrowDown className={`h-4 w-4 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} />
+        </button>
+        {isOpen && (
+          <div className="space-y-2 px-3 pb-3">
+            {tehranAreas.map((area) => (
+              <div key={area.label} className="overflow-hidden rounded-xl border border-slate-200">
+                <button
+                  type="button"
+                  aria-expanded={selectedArea === area.label}
+                  onClick={() => {
+                    setSelectedArea((current) => current === area.label ? null : area.label);
+                    setSearch("");
+                  }}
+                  className="flex w-full items-center justify-between bg-slate-50 px-3 py-3 text-right text-sm font-bold text-slate-700 hover:bg-orange-50"
+                >
+                  <span>{area.label}</span>
+                  <ArrowDown className={`h-4 w-4 transition-transform duration-200 ${selectedArea === area.label ? "rotate-180" : ""}`} />
+                </button>
+                {selectedArea === area.label && (
+                  <div className="border-t border-slate-200 p-3">
+                    <label className="flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-3 focus-within:border-orange-400">
+                      <Search className="h-4 w-4 shrink-0 text-slate-400" />
+                      <span className="sr-only">جست‌وجوی محله</span>
+                      <input
+                        type="search"
+                        value={search}
+                        onChange={(event) => setSearch(event.target.value)}
+                        placeholder="جست‌وجوی محله..."
+                        className="w-full bg-transparent py-2.5 text-sm outline-none placeholder:text-slate-400"
+                      />
+                    </label>
+                    <div className="mt-3 grid max-h-56 grid-cols-2 gap-2 overflow-y-auto">
+                      {area.neighborhoods
+                        .filter((neighborhood) => neighborhood.includes(search.trim()))
+                        .map((neighborhood) => (
+                          <Link
+                            key={neighborhood}
+                            href={`/coverage/${neighborhood}`}
+                            className="flex items-center gap-2 rounded-lg border border-slate-200 px-2.5 py-2.5 text-sm font-medium text-slate-700 hover:border-orange-300 hover:bg-orange-50"
+                          >
+                            <MapPin className="h-4 w-4 shrink-0 text-orange-500" />
+                            <span>{neighborhood}</span>
+                          </Link>
+                        ))}
+                    </div>
+                    <a
+                      href={toTelephoneHref(getCoveragePhone("تهران", area.direction, phone))}
+                      className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-orange-500 px-4 py-3 text-sm font-bold text-white hover:bg-orange-600"
+                    >
+                      <Phone className="h-4 w-4" />
+                      تماس با {area.label}
+                    </a>
+                  </div>
+                )}
+              </div>
+            ))}
+            <div className="overflow-hidden rounded-xl border border-slate-200">
+              <button
+                type="button"
+                aria-expanded={selectedArea === "گیلان"}
+                onClick={() => setSelectedArea((current) => current === "گیلان" ? null : "گیلان")}
+                className="flex w-full items-center justify-between bg-slate-50 px-3 py-3 text-right text-sm font-bold text-slate-700 hover:bg-orange-50"
+              >
+                <span>گیلان</span>
+                <ArrowDown className={`h-4 w-4 transition-transform duration-200 ${selectedArea === "گیلان" ? "rotate-180" : ""}`} />
+              </button>
+              {selectedArea === "گیلان" && (
+                <a
+                  href={toTelephoneHref(GILAN_PHONE)}
+                  className="flex items-center justify-center gap-2 border-t border-slate-200 px-3 py-3 text-sm font-bold text-orange-600"
+                >
+                  <Phone className="h-4 w-4" />
+                  تماس با گیلان: {GILAN_PHONE}
+                </a>
+              )}
+            </div>
+            <Link
+              href="/coverage"
+              className="block rounded-xl px-3 py-3 text-center text-sm font-bold text-orange-600 hover:bg-orange-50"
+            >
+              مشاهده صفحهٔ کامل مناطق تحت پوشش
+            </Link>
+          </div>
+        )}
+      </div>
+    );
   }
 
   const panel = (
@@ -164,15 +218,15 @@ export function CoverageSelector({ variant = "dropdown", className = "", phone }
           </label>
           <div className="mt-5 grid max-h-[55vh] grid-cols-2 gap-2 overflow-y-auto sm:grid-cols-3">
             {filteredNeighborhoods.map((neighborhood) => (
-              <a
+              <Link
                 key={neighborhood}
-                href={toTelephoneHref(getCoveragePhone("تهران", selectedTehranArea.direction, phone))}
-                aria-label={`تماس با ${selectedTehranArea.label}، محله ${neighborhood}`}
+                href={`/coverage/${neighborhood}`}
+                aria-label={`باربری ${neighborhood}`}
                 className="flex items-center gap-2 rounded-xl border border-slate-200 px-3 py-3 text-sm font-bold text-slate-700 transition hover:border-orange-300 hover:bg-orange-50 hover:text-orange-700"
               >
                 <MapPin className="h-4 w-4 shrink-0 text-orange-500" />
                 <span>{neighborhood}</span>
-              </a>
+              </Link>
             ))}
             {filteredNeighborhoods.length === 0 && (
               <p className="col-span-full py-6 text-center text-sm text-slate-500">محله‌ای پیدا نشد.</p>

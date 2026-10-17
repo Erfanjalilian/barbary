@@ -1,7 +1,78 @@
-import Link from "next/link";
-import { ArrowLeft, CircleDashed, MapPinned, ShieldCheck, Star, Truck, PackageCheck, PhoneCall } from "lucide-react";
+import { ArrowLeft, CircleDashed, ShieldCheck, Star, Truck, PhoneCall } from "lucide-react";
 import { SiteHeader, SiteFooter, SectionHeading } from "@/components/site/layout";
+import { StatsCounter } from "@/components/site/stats-counter";
+import { GILAN_PHONE } from "@/lib/coverage-phones";
 import { getPublicData } from "@/lib/site-data";
+
+const homeServices = [
+  {
+    title: "باربری اثاثیه منزل",
+    description:
+      "جابجایی امن و سریع اثاثیه منزل شما با تیم مجرب و کامیون‌های استاندارد به تمام نقاط تهران",
+    image: "/khadamatetakhasosi/service-home-nmzk4COM.jpg",
+  },
+  {
+    title: "باربری اداری و تجاری",
+    description:
+      "انتقال تخصصی تجهیزات اداری، کامپیوترها و لوازم تجاری با رعایت استانداردهای ایمنی",
+    image: "/khadamatetakhasosi/service-office-Bxv9SYJ8.jpg",
+  },
+  {
+    title: "بسته بندی تخصصی",
+    description:
+      "بسته بندی اصولی تمامی وسایل مهم منزل با کارتن و نایلون های اسباب کشی",
+    image: "/khadamatetakhasosi/s05.png",
+  },
+  {
+    title: "خودروهای مدرن",
+    description:
+      "استفاده از بروزترین خودروهای مسقف به منظور تامین سلامت لوازم شما",
+    image: "/khadamatetakhasosi/IMG-20241129-WA0011.jpg",
+  },
+];
+
+const branchContacts = [
+  { name: "شعبه شمال تهران", phone: "02126299541", number: "02126299541" },
+  { name: "شعبه شرق تهران", phone: "02186095100", number: "02186095100" },
+  { name: "شعبه مرکز تهران", phone: "02126299541", number: "02126299541" },
+  { name: "شعبه غرب تهران", phone: "02144597319", number: "02144597319" },
+];
+
+const homeAdvantages = [
+  {
+    title: "ضمانت سلامت بار",
+    description: "تضمین کامل سلامت اثاثیه شما با بیمه حمل و نقل",
+  },
+  {
+    title: "قیمت مناسب و شفاف",
+    description: "ارائه قیمت دقیق بدون هزینه‌های پنهان و اضافی",
+  },
+  {
+    title: "سرعت و وقت‌شناسی",
+    description: "انجام به موقع سفارشات در کوتاه‌ترین زمان ممکن",
+  },
+  {
+    title: "کارگران مجرب",
+    description: "تیم حرفه‌ای با سال‌ها تجربه در جابجایی اثاثیه",
+  },
+  {
+    title: "ناوگان مدرن",
+    description: "کامیون‌های استاندارد و مجهز در انواع سایزها",
+  },
+  {
+    title: "پشتیبانی ۲۴ ساعته",
+    description: "پاسخگویی شبانه‌روزی در تمام روزهای هفته",
+  },
+];
+
+const portfolioImages = [
+  "1-1-1.jpg",
+  "c016dc3f526442af9c32ded8b0d9807c-1.jpg",
+  "3.jpg",
+  "12104642_992.jpg",
+  "download.jpg",
+  "imag1.jpg",
+];
 
 export default async function HomePage() {
   const data = await getPublicData();
@@ -10,12 +81,11 @@ export default async function HomePage() {
     <>
       <SiteHeader settings={data.settings} />
       <main className="bg-slate-50">
-        <section className="mx-auto max-w-7xl px-4 pb-12 pt-10 lg:px-8 lg:pb-20 lg:pt-16">
-          <div className="relative isolate flex min-h-[560px] items-center overflow-hidden rounded-[36px] bg-slate-950 px-6 py-12 shadow-[0_20px_60px_rgba(15,23,42,0.18)] sm:min-h-[520px] md:px-12 lg:min-h-[600px] lg:px-16">
+        <section className="w-full pb-12 lg:pb-20">
+          <div className="relative isolate flex min-h-[560px] w-full items-center overflow-hidden bg-slate-950 px-6 py-12 sm:min-h-[520px] md:px-12 lg:min-h-[600px] lg:px-16">
             <img
-              src={data.settings.heroImage}
-              alt=""
-              aria-hidden="true"
+              src="/hero/b-1.jpg"
+              alt="خودروی باربری آنلاین"
               className="absolute inset-0 -z-20 h-full w-full object-cover"
             />
             <div className="absolute inset-0 -z-10 bg-gradient-to-l from-slate-950/90 via-slate-950/60 to-slate-950/20" />
@@ -56,11 +126,13 @@ export default async function HomePage() {
           </div>
         </section>
 
+        <StatsCounter />
+
         <section id="services" className="mx-auto max-w-7xl px-4 py-16 lg:px-8">
           <SectionHeading title="خدمات تخصصی ما" description="مجموعه خدمات اسباب‌کشی ما با تمرکز بر ایمنی، نظم و سرعت اجرا طراحی شده‌اند." />
-          <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {data.services.map((service) => (
-              <article key={service.id} className="overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-xl">
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+            {homeServices.map((service) => (
+              <article key={service.title} className="overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-xl">
                 <div className="relative h-56 overflow-hidden">
                   <img src={service.image} alt={service.title} className="h-full w-full object-cover" />
                 </div>
@@ -73,12 +145,32 @@ export default async function HomePage() {
           </div>
         </section>
 
+        <section className="bg-orange-500 py-16 text-white">
+          <div className="mx-auto max-w-7xl px-4 lg:px-8">
+            <SectionHeading title="شماره شعبه‌ها" description="برای تماس سریع با شعبه موردنظر، روی دکمه مربوطه کلیک کنید." />
+            <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+              {branchContacts.map((branch) => (
+                <div key={branch.name} className="rounded-[28px] border border-white/20 bg-orange-600/20 p-5 shadow-[0_20px_40px_rgba(194,65,12,0.18)] backdrop-blur-sm">
+                  <p className="text-lg font-black text-white">{branch.name}</p>
+                  <p className="mt-3 text-base font-medium text-orange-50">{branch.number}</p>
+                  <a
+                    href={`tel:${branch.phone}`}
+                    className="mt-5 inline-flex w-full items-center justify-center rounded-full bg-white px-4 py-3 text-sm font-black text-orange-600 transition hover:bg-orange-50"
+                  >
+                    تماس فوری
+                  </a>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section className="bg-white py-16">
           <div className="mx-auto max-w-7xl px-4 lg:px-8">
-            <SectionHeading title="چرا ما را انتخاب کنید؟" description="با ما، اسباب‌کشی به تجربه‌ای آرام، دقیق و حرفه‌ای تبدیل می‌شود." />
-            <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-              {data.advantages.map((advantage) => (
-                <div key={advantage.id} className="rounded-[28px] border border-slate-200 bg-slate-50 p-6 shadow-sm">
+            <SectionHeading title="مزایای انتخاب آنلاین بار" description="با ما، اسباب‌کشی به تجربه‌ای آرام، دقیق و حرفه‌ای تبدیل می‌شود." />
+            <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+              {homeAdvantages.map((advantage) => (
+                <div key={advantage.title} className="rounded-[28px] border border-slate-200 bg-slate-50 p-6 shadow-sm">
                   <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-100 text-orange-600">
                     <Star className="h-6 w-6" />
                   </div>
@@ -90,16 +182,41 @@ export default async function HomePage() {
           </div>
         </section>
 
+        <section className="px-4 py-12 lg:px-8">
+          <div className="mx-auto flex max-w-7xl flex-col items-center gap-6 rounded-[32px] bg-orange-50 px-6 py-10 text-center sm:px-10 md:flex-row md:justify-between md:text-right">
+            <div className="flex flex-col items-center gap-5 md:flex-row md:text-right">
+              <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-orange-100 text-orange-600">
+                <PhoneCall className="h-8 w-8" aria-hidden="true" />
+              </div>
+              <div>
+                <h2 className="text-2xl font-black text-slate-900 md:text-3xl">
+                  دریافت یک مشاوره رایگان برای باربری
+                </h2>
+                <p className="mt-3 text-base leading-7 text-slate-600">
+                  همکاران ما آماده پاسخ گویی به سوالات شما در زمینه حمل بار و بسته بندی می باشد
+                </p>
+              </div>
+            </div>
+            <a
+              href={`tel:${GILAN_PHONE}`}
+              className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-orange-500 px-7 py-3.5 text-base font-bold text-white shadow-lg shadow-orange-200 transition hover:bg-orange-600"
+            >
+              <PhoneCall className="h-5 w-5" aria-hidden="true" />
+              تماس با ما
+            </a>
+          </div>
+        </section>
+
         <section className="mx-auto max-w-7xl px-4 py-16 lg:px-8">
-          <SectionHeading title="نمونه‌کارها" description="برخی از پروژه‌های موفق ما در جابه‌جایی و حمل اثاثیه در مناطق مختلف." />
-          <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {data.portfolio.map((item) => (
-              <div key={item.id} className="overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm">
-                <img src={item.image} alt={item.title} className="h-64 w-full object-cover" />
-                <div className="p-5">
-                  <h3 className="text-xl font-black text-slate-900">{item.title}</h3>
-                  <p className="mt-3 text-sm leading-7 text-slate-600">{item.description}</p>
-                </div>
+          <SectionHeading title="نمونه‌کارها" />
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+            {portfolioImages.map((image, index) => (
+              <div key={image} className="overflow-hidden rounded-[28px] shadow-sm">
+                <img
+                  src={`/nemoonekarha/${image}`}
+                  alt={`تصویر نمونه‌کار باربری ${index + 1}`}
+                  className="h-64 w-full object-cover transition duration-300 hover:scale-105"
+                />
               </div>
             ))}
           </div>
@@ -107,30 +224,33 @@ export default async function HomePage() {
 
         <section className="bg-slate-900 py-16 text-white">
           <div className="mx-auto max-w-7xl px-4 lg:px-8">
-            <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
-              <div>
-                <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 text-xs font-bold text-orange-300 ring-1 ring-white/10">
-                  <MapPinned className="h-4 w-4" />
-                  پوشش خدماتی
-                </div>
-                <h2 className="mt-6 text-3xl font-black md:text-4xl">پوشش کامل در شهر و حومه</h2>
-                <p className="mt-4 max-w-2xl text-base leading-8 text-slate-300">
-                  خدمات ما در تهران، شهرری، کرج و مناطق اطراف با برنامه‌ریزی دقیق و هماهنگی کامل ارائه می‌شود.
-                </p>
+            <div className="mx-auto max-w-3xl text-center">
+              <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-bold text-orange-300 ring-1 ring-white/10">
+                <PhoneCall className="h-4 w-4" aria-hidden="true" />
+                پاسخگویی ۲۴ ساعته
               </div>
-              <div className="space-y-4">
-                {data.coverageAreas.map((area) => (
-                  <div key={area.id} className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                    <div className="flex items-center justify-between gap-3">
-                      <div>
-                        <div className="text-lg font-black">{area.name}</div>
-                        <div className="text-sm text-slate-300">{area.zone}</div>
-                      </div>
-                      <PackageCheck className="h-5 w-5 text-orange-300" />
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <h2 className="mt-6 text-3xl font-black md:text-4xl">همین الان با ما تماس بگیرید</h2>
+              <p className="mt-4 text-base leading-8 text-slate-300">
+                مشاوره رایگان و استعلام قیمت فوری
+              </p>
+            </div>
+            <div className="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+              {branchContacts.map((branch) => (
+                <a
+                  key={branch.name}
+                  href={`tel:${branch.phone}`}
+                  className="group rounded-[28px] border border-white/10 bg-white/5 p-6 text-center transition hover:-translate-y-1 hover:border-orange-400/60 hover:bg-white/10"
+                >
+                  <PhoneCall className="mx-auto h-7 w-7 text-orange-400" aria-hidden="true" />
+                  <p className="mt-4 text-lg font-black">{branch.name}</p>
+                  <p dir="ltr" className="mt-3 text-xl font-bold tracking-wide text-orange-200 transition group-hover:text-white">
+                    {branch.number}
+                  </p>
+                  <span className="mt-5 inline-flex rounded-full bg-orange-500 px-5 py-2.5 text-sm font-bold text-white transition group-hover:bg-orange-600">
+                    تماس با شعبه
+                  </span>
+                </a>
+              ))}
             </div>
           </div>
         </section>

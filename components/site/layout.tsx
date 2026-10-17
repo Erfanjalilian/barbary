@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { MapPinned, Phone, PhoneCall, ShieldCheck, Sparkles } from "lucide-react";
 import type { SiteSettings, ServiceItem, AdvantageItem, PortfolioItem, CoverageArea } from "@/types/site";
 import { CoverageSelector } from "@/components/site/coverage-selector";
@@ -15,13 +16,18 @@ export function SiteHeader({ settings }: { settings: SiteSettings }) {
 
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur-md">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 lg:px-8">
+      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-4 py-4 lg:flex-nowrap lg:px-8">
         <Link href="/" className="flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-orange-500 text-lg font-bold text-white shadow-sm">
-            H
-          </div>
+          <Image
+            src="/logo/images%20(10).jpg"
+            alt="لوگوی باربری آنلاین"
+            width={72}
+            height={48}
+            className="h-12 w-[72px] rounded-xl object-contain"
+            priority
+          />
           <div>
-            <div className="text-xl font-extrabold text-slate-900">{settings.siteName}</div>
+            <div className="text-xl font-extrabold text-slate-900">باربری آنلاین</div>
             <div className="text-xs text-slate-500">اسباب‌کشی حرفه‌ای</div>
           </div>
         </Link>
@@ -44,24 +50,28 @@ export function SiteHeader({ settings }: { settings: SiteSettings }) {
           </a>
         </div>
 
-        <div className="lg:hidden">
-          <details className="group relative">
-            <summary className="list-none cursor-pointer rounded-full border border-slate-200 bg-slate-50 px-3 py-2 text-slate-700">
-              ☰
+        <div className="relative basis-full lg:hidden">
+          <details className="group">
+            <summary className="absolute -top-[3.75rem] left-0 list-none cursor-pointer rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xl leading-6 text-slate-700 marker:hidden">
+              <span className="group-open:hidden" aria-hidden="true">☰</span>
+              <span className="hidden group-open:inline" aria-hidden="true">×</span>
+              <span className="sr-only">باز و بسته کردن فهرست</span>
             </summary>
-            <div className="absolute left-0 top-14 w-56 rounded-2xl border border-slate-200 bg-white p-3 shadow-lg">
-              {nav.map((item) => (
-                item.isCoverage ? (
-                  <CoverageSelector key={item.href} phone={settings.phone} />
-                ) : (
-                  <Link key={item.href} href={item.href} className="block rounded-xl px-3 py-2 text-sm text-slate-700 hover:bg-slate-100">
-                    {item.label}
-                  </Link>
-                )
-              ))}
-              <a href={`tel:${GILAN_PHONE}`} className="mt-2 block rounded-xl bg-orange-500 px-3 py-2 text-center text-sm font-bold text-white">
-                تماس فوری
-              </a>
+            <div className="w-full border-t border-slate-200 bg-white pb-4 pt-3">
+              <nav className="mx-auto flex w-full max-w-7xl flex-col px-4">
+                {nav.map((item) => (
+                  item.isCoverage ? (
+                    <CoverageSelector key={item.href} variant="mobile" phone={settings.phone} />
+                  ) : (
+                    <Link key={item.href} href={item.href} className="border-b border-slate-100 px-3 py-3 text-sm font-medium text-slate-700 transition hover:bg-orange-50 hover:text-orange-600">
+                      {item.label}
+                    </Link>
+                  )
+                ))}
+                <a href={`tel:${GILAN_PHONE}`} className="mt-3 block rounded-xl bg-orange-500 px-3 py-3 text-center text-sm font-bold text-white">
+                  تماس فوری
+                </a>
+              </nav>
             </div>
           </details>
         </div>
@@ -188,9 +198,9 @@ export function SiteFooter({ settings }: { settings: SiteSettings }) {
             key={label}
             href={`tel:${phone}`}
             aria-label={`تماس با ${label}`}
-            className="flex min-w-0 flex-col items-center justify-center gap-1 rounded-lg px-0.5 py-1 text-center text-[10px] font-bold leading-tight text-slate-700 transition hover:text-orange-600 focus-visible:outline-2 focus-visible:outline-orange-500"
+            className="flex min-w-0 flex-col items-center justify-center gap-1 rounded-lg px-0.5 py-1 text-center text-xs font-bold leading-tight text-slate-700 transition hover:text-orange-600 focus-visible:outline-2 focus-visible:outline-orange-500"
           >
-            <PhoneCall className="h-4 w-4 shrink-0 text-orange-500" />
+            <PhoneCall className="h-5 w-5 shrink-0 text-orange-500" />
             <span>{label}</span>
           </a>
         ))}
