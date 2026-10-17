@@ -1,5 +1,9 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Iran province and city data
+
+`data/iran-cities.json` contains the 31 provinces and 1,119 city names sourced from [Iran-Cities-Data](https://github.com/mahdi-eth/Iran-Cities-Data), licensed under the MIT License. The source license and copyright notice are available in that repository.
+
 ## Getting Started
 
 First, run the development server:

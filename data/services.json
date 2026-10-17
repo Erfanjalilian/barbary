@@ -1,0 +1,32 @@
+[
+  {
+    "id": "svc-1",
+    "title": "اسباب‌کشی منزل",
+    "description": "جابه‌جایی کامل اثاثیه و وسایل منزل با برنامه‌ریزی دقیق و تیم حرفه‌ای.",
+    "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+    "isVisible": true,
+    "order": 1,
+    "createdAt": "2026-10-17T10:20:11.581Z",
+    "updatedAt": "2026-10-17T10:20:11.581Z"
+  },
+  {
+    "id": "svc-2",
+    "title": "بسته‌بندی حرفه‌ای",
+    "description": "استفاده از مواد مناسب و بسته‌بندی امن برای محافظت از وسایل حساس و شکستنی.",
+    "image": "https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=800&q=80",
+    "isVisible": true,
+    "order": 2,
+    "createdAt": "2026-10-17T10:20:11.581Z",
+    "updatedAt": "2026-10-17T10:20:11.581Z"
+  },
+  {
+    "id": "svc-3",
+    "title": "حمل اثاثیه اداری",
+    "description": "انتقال لوازم اداری و تجهیزات دفتر با نظم، دقت و زمان‌بندی مناسب.",
+    "image": "https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=800&q=80",
+    "isVisible": true,
+    "order": 3,
+    "createdAt": "2026-10-17T10:20:11.581Z",
+    "updatedAt": "2026-10-17T10:20:11.581Z"
+  }
+]

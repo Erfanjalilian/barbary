@@ -1,0 +1,26 @@
+[
+  {
+    "id": "area-1",
+    "name": "تهران",
+    "description": "خدمات حمل اثاثیه در کل تهران و مناطق اطراف",
+    "zone": "کل تهران",
+    "isVisible": true,
+    "order": 1
+  },
+  {
+    "id": "area-2",
+    "name": "شهرری",
+    "description": "پوشش خدماتی در مناطق شمالی و جنوبی شهرری",
+    "zone": "شهرری",
+    "isVisible": true,
+    "order": 2
+  },
+  {
+    "id": "area-3",
+    "name": "کرج",
+    "description": "اسباب‌کشی به شهر کرج و مناطق اطراف",
+    "zone": "کرج",
+    "isVisible": true,
+    "order": 3
+  }
+]

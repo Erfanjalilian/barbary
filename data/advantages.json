@@ -1,0 +1,34 @@
+[
+  {
+    "id": "adv-1",
+    "title": "جابه‌جایی اصولی و ایمن",
+    "description": "حمل و نقل دقیق و ایمن وسایل با رعایت استانداردهای حرفه‌ای.",
+    "icon": "shield-check",
+    "isVisible": true,
+    "order": 1
+  },
+  {
+    "id": "adv-2",
+    "title": "نیروهای مجرب",
+    "description": "تیم متخصص با تجربه بالا در حمل و نقل اثاثیه منزل و اداری.",
+    "icon": "users",
+    "isVisible": true,
+    "order": 2
+  },
+  {
+    "id": "adv-3",
+    "title": "بسته‌بندی استاندارد",
+    "description": "استفاده از کارتن، نایلون و مواد محافظتی مناسب برای هر وسیله.",
+    "icon": "package-check",
+    "isVisible": true,
+    "order": 3
+  },
+  {
+    "id": "adv-4",
+    "title": "نظم و زمان‌بندی",
+    "description": "برنامه‌ریزی دقیق برای انجام سریع و منظم اسباب‌کشی.",
+    "icon": "clock-3",
+    "isVisible": true,
+    "order": 4
+  }
+]
