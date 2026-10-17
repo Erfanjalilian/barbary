@@ -60,7 +60,7 @@ export function SiteHeader({ settings }: { settings: SiteSettings }) {
                 )
               ))}
               <a href={`tel:${GILAN_PHONE}`} className="mt-2 block rounded-xl bg-orange-500 px-3 py-2 text-center text-sm font-bold text-white">
-                تماس فوری: 0911 574 2824
+                تماس فوری
               </a>
             </div>
           </details>

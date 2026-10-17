@@ -164,13 +164,15 @@ export function CoverageSelector({ variant = "dropdown", className = "", phone }
           </label>
           <div className="mt-5 grid max-h-[55vh] grid-cols-2 gap-2 overflow-y-auto sm:grid-cols-3">
             {filteredNeighborhoods.map((neighborhood) => (
-              <div
+              <a
                 key={neighborhood}
-                className="flex items-center gap-2 rounded-xl border border-slate-200 px-3 py-3 text-sm font-bold text-slate-700"
+                href={toTelephoneHref(getCoveragePhone("تهران", selectedTehranArea.direction, phone))}
+                aria-label={`تماس با ${selectedTehranArea.label}، محله ${neighborhood}`}
+                className="flex items-center gap-2 rounded-xl border border-slate-200 px-3 py-3 text-sm font-bold text-slate-700 transition hover:border-orange-300 hover:bg-orange-50 hover:text-orange-700"
               >
                 <MapPin className="h-4 w-4 shrink-0 text-orange-500" />
                 <span>{neighborhood}</span>
-              </div>
+              </a>
             ))}
             {filteredNeighborhoods.length === 0 && (
               <p className="col-span-full py-6 text-center text-sm text-slate-500">محله‌ای پیدا نشد.</p>
