@@ -3,7 +3,7 @@
     "id": "box-1",
     "title": "بسته‌بندی عتیقه‌جات",
     "description": "حفاظت ویژه برای وسایل حساس، شیشه‌ای و ارزشمند.",
-    "image": "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=800&q=80",
+    "image": "/statixImages/photo-1556911220-bff31c812dba (1).avif",
     "isVisible": true,
     "order": 1
   },
@@ -11,7 +11,7 @@
     "id": "box-2",
     "title": "بسته‌بندی لباس و پارچه",
     "description": "استفاده از جعبه‌ها و مواد مناسب برای جلوگیری از چروک و آسیب.",
-    "image": "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=800&q=80",
+    "image": "/statixImages/photo-1556911220-bff31c812dba.avif",
     "isVisible": true,
     "order": 2
   }

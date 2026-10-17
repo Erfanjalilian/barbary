@@ -39,10 +39,9 @@ export function SiteHeader({ settings }: { settings: SiteSettings }) {
         </nav>
 
         <div className="hidden items-center gap-4 lg:flex">
-          <a href={`tel:${GILAN_PHONE}`} className="text-sm font-medium text-slate-700">0911 574 2824</a>
-          <Link href="/contact" className="rounded-full bg-orange-500 px-5 py-2.5 text-sm font-bold text-white shadow-md shadow-orange-200 transition hover:bg-orange-600">
+          <a href={`tel:${GILAN_PHONE}`} className="rounded-full bg-orange-500 px-5 py-2.5 text-sm font-bold text-white shadow-md shadow-orange-200 transition hover:bg-orange-600">
             تماس با ما
-          </Link>
+          </a>
         </div>
 
         <div className="lg:hidden">
