@@ -155,7 +155,7 @@ export function SiteFooter({ settings }: { settings: SiteSettings }) {
     { label: "مرکز تهران", phone: getCoveragePhone("تهران", "مرکز", settings.phone) },
     { label: "شمال تهران", phone: getCoveragePhone("تهران", "شمال", settings.phone) },
     { label: "جنوب تهران", phone: getCoveragePhone("تهران", "جنوب", settings.phone) },
-    { label: "گیلان", phone: GILAN_PHONE },
+    { label: "گیلان و مازندران", phone: GILAN_PHONE },
   ];
 
   return (

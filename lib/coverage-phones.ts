@@ -2,9 +2,10 @@ export type TehranBranchDirection = "شمال" | "جنوب" | "شرق" | "غرب
 
 export const GILAN_PHONE = "09115742824";
 
-const tehranBranchPhones: Partial<Record<TehranBranchDirection, string>> = {
+export const TEHRAN_BRANCH_PHONES: Record<TehranBranchDirection, string> = {
   شمال: "02126210683",
   جنوب: "02634200766",
+  شرق: "02186095100",
   غرب: "02144387002",
   مرکز: "02188281009",
 };
@@ -18,5 +19,5 @@ export function getCoveragePhone(
     return defaultPhone;
   }
 
-  return tehranBranchPhones[direction] ?? defaultPhone;
+  return TEHRAN_BRANCH_PHONES[direction] ?? defaultPhone;
 }

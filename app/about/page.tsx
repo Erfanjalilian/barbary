@@ -7,6 +7,7 @@ import {
   Truck,
 } from "lucide-react";
 import { SiteHeader, SiteFooter } from "@/components/site/layout";
+import { TEHRAN_BRANCH_PHONES } from "@/lib/coverage-phones";
 import { getPublicData } from "@/lib/site-data";
 
 const aboutServices = [
@@ -46,10 +47,10 @@ const workItems = [
 ];
 
 const branchContacts = [
-  { name: "شمال تهران", phone: "02126299541" },
-  { name: "غرب تهران", phone: "02144597319" },
-  { name: "مرکز تهران", phone: "02126299541" },
-  { name: "شرق تهران", phone: "02186095100" },
+  { name: "شمال تهران", phone: TEHRAN_BRANCH_PHONES["شمال"] },
+  { name: "غرب تهران", phone: TEHRAN_BRANCH_PHONES["غرب"] },
+  { name: "مرکز تهران", phone: TEHRAN_BRANCH_PHONES["مرکز"] },
+  { name: "شرق تهران", phone: TEHRAN_BRANCH_PHONES["شرق"] },
 ];
 
 const portfolioImages = [

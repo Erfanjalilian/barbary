@@ -1,7 +1,7 @@
 import { ArrowLeft, CircleDashed, ShieldCheck, Star, Truck, PhoneCall } from "lucide-react";
 import { SiteHeader, SiteFooter, SectionHeading } from "@/components/site/layout";
 import { StatsCounter } from "@/components/site/stats-counter";
-import { GILAN_PHONE } from "@/lib/coverage-phones";
+import { GILAN_PHONE, TEHRAN_BRANCH_PHONES } from "@/lib/coverage-phones";
 import { getPublicData } from "@/lib/site-data";
 
 const homeServices = [
@@ -32,10 +32,150 @@ const homeServices = [
 ];
 
 const branchContacts = [
-  { name: "شعبه شمال تهران", phone: "02126299541", number: "02126299541" },
-  { name: "شعبه شرق تهران", phone: "02186095100", number: "02186095100" },
-  { name: "شعبه مرکز تهران", phone: "02126299541", number: "02126299541" },
-  { name: "شعبه غرب تهران", phone: "02144597319", number: "02144597319" },
+  {
+    name: "شعبه شمال تهران",
+    phone: TEHRAN_BRANCH_PHONES["شمال"],
+    number: TEHRAN_BRANCH_PHONES["شمال"],
+    neighborhoods: [
+      "تجریش",
+      "الهیه",
+      "دروس",
+      "جردن",
+      "زرگنده",
+      "زعفرانیه",
+      "نیاوران",
+      "فرمانیه",
+      "قلهک",
+      "جماران",
+      "لواسان",
+      "لویزان",
+      "ازگل",
+      "مینی سیتی",
+      "سوهانک",
+      "حسین آباد",
+      "مبارک آباد",
+      "اقدسیه",
+      "آجودانیه",
+      "محمودیه",
+      "کامرانیه",
+      "داودیه",
+      "دزاشیب",
+      "اوین",
+      "درکه",
+      "ونک",
+      "سعادت آباد",
+    ],
+  },
+  {
+    name: "شعبه شرق تهران",
+    phone: TEHRAN_BRANCH_PHONES["شرق"],
+    number: TEHRAN_BRANCH_PHONES["شرق"],
+    neighborhoods: [
+      "پیروزی",
+      "تهران پارس",
+      "هروی",
+      "حکیمیه",
+      "رسالت",
+      "هنگام",
+      "ساقدوش",
+      "تهران نو",
+      "شمیران نو",
+      "دلاوران",
+      "سراج",
+      "استخر",
+      "افسریه",
+      "مسعودیه",
+      "دماوند",
+      "چهارراه تلفنخانه",
+      "امام حسین",
+      "هفت حوض",
+      "لویزان",
+      "قاسم آباد",
+      "تسلیحات",
+      "وحیدیه",
+      "پدر ثانی",
+      "اصفهانک",
+      "حشمتیه",
+      "نارمک",
+      "خاک سفید",
+      "سرخه حصار",
+      "شمس آباد",
+      "مجیدیه",
+      "قنات کوثر",
+      "نظام آباد",
+      "شهید محلاتی",
+      "بسیج",
+      "حقانی",
+    ],
+  },
+  {
+    name: "شعبه مرکز تهران",
+    phone: TEHRAN_BRANCH_PHONES["مرکز"],
+    number: TEHRAN_BRANCH_PHONES["مرکز"],
+    neighborhoods: [
+      "یوسف آباد",
+      "امیر آباد",
+      "فاطمی",
+      "عباس آباد",
+      "جلفا",
+      "خواجه عبدالله",
+      "بهار شیراز",
+      "زرتشت",
+      "بهجت آباد",
+      "تخت جمشید (طالقانی)",
+      "تخت طاووس",
+      "سهروردی",
+      "آپادانا",
+      "توحید",
+      "جمهوری",
+      "نادری",
+      "استانبول",
+      "توپخانه",
+      "لاله زار",
+      "باغ صبا",
+      "آرژانتین",
+      "آذربایجان",
+    ],
+  },
+  {
+    name: "شعبه غرب تهران",
+    phone: TEHRAN_BRANCH_PHONES["غرب"],
+    number: TEHRAN_BRANCH_PHONES["غرب"],
+    neighborhoods: [
+      "شهرک آزادی",
+      "پونک",
+      "جنت آباد",
+      "سعادت آباد",
+      "شهران",
+      "شهرک غرب",
+      "ستارخان",
+      "فردوس",
+      "آریا شهر",
+      "شهر زیبا",
+      "طرشت",
+      "گیشا",
+      "چیتگر",
+      "شهرک اکباتان",
+      "کوی بیمه",
+      "تهرانسر",
+      "حصارک",
+      "آزادی",
+      "دهکده المپیک",
+      "شهرک امیرکبیر",
+      "کن",
+      "وردآورد",
+      "شهرک گلستان",
+      "تهران ویلا",
+      "فرحزاد",
+      "چهار دیواری",
+      "جیحون",
+      "هاشمی",
+      "دامپزشکی",
+      "مهرآباد",
+      "سرو آزاد",
+      "کرج",
+    ],
+  },
 ];
 
 const homeAdvantages = [
@@ -99,7 +239,7 @@ export default async function HomePage() {
               </h1>
               <p className="mt-5 max-w-xl text-lg leading-8 text-white/85">{data.settings.heroDescription}</p>
               <div className="mt-8 flex flex-wrap gap-4">
-                <a href="tel:02188281009" className="inline-flex items-center gap-2 rounded-full bg-orange-500 px-6 py-3.5 text-base font-bold text-white shadow-lg shadow-orange-950/30 transition hover:bg-orange-600">
+                <a href={`tel:${TEHRAN_BRANCH_PHONES["مرکز"]}`} className="inline-flex items-center gap-2 rounded-full bg-orange-500 px-6 py-3.5 text-base font-bold text-white shadow-lg shadow-orange-950/30 transition hover:bg-orange-600">
                   <PhoneCall className="h-5 w-5" />
                   {data.settings.ctaText}
                 </a>
@@ -109,7 +249,7 @@ export default async function HomePage() {
                 </a>
               </div>
               <div className="mt-8 flex flex-wrap items-center gap-5 text-sm text-white/85">
-                <a href="tel:02188281009" className="flex items-center gap-2 font-bold text-orange-200 transition hover:text-orange-100">
+                <a href={`tel:${TEHRAN_BRANCH_PHONES["مرکز"]}`} className="flex items-center gap-2 font-bold text-orange-200 transition hover:text-orange-100">
                   <PhoneCall className="h-5 w-5 text-orange-300" />
                   خط ویژه ۱۰۰۹
                 </a>
@@ -179,6 +319,66 @@ export default async function HomePage() {
                 </div>
               ))}
             </div>
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-7xl px-4 py-16 lg:px-8">
+          <SectionHeading
+            title="باربری مناطق تهران"
+            description="ارائه خدمات باربری در تمامی مناطق ۲۲ گانه تهران"
+          />
+          <div className="mt-10 space-y-6">
+            {branchContacts.map((branch) => {
+              const neighborhoodRows = branch.neighborhoods.reduce<string[][]>(
+                (rows, neighborhood, index) => {
+                  if (index % 3 === 0) rows.push([]);
+                  rows[rows.length - 1].push(neighborhood);
+                  return rows;
+                },
+                [],
+              );
+
+              return (
+                <article
+                  key={branch.name}
+                  className="overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm"
+                >
+                  <h3 className="bg-orange-50 px-6 py-4 text-lg font-black text-slate-900">
+                    {branch.name.replace("شعبه ", "")}
+                  </h3>
+                  <div>
+                    <table className="w-full table-fixed border-collapse text-right">
+                      <tbody className="divide-y divide-slate-200">
+                        {neighborhoodRows.map((row, rowIndex) => (
+                          <tr key={rowIndex} className="divide-x divide-x-reverse divide-slate-200">
+                            {Array.from({ length: 3 }, (_, columnIndex) => {
+                              const neighborhood = row[columnIndex];
+
+                              return (
+                                <td
+                                  key={columnIndex}
+                                  className="w-1/3 break-words px-2 py-3 text-xs leading-6 text-slate-700 sm:px-4 sm:py-4 sm:text-sm"
+                                >
+                                  {neighborhood ? `باربری ${neighborhood}` : null}
+                                </td>
+                              );
+                            })}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                  <div className="border-t border-slate-200 px-6 py-4">
+                    <a
+                      href={`tel:${branch.phone}`}
+                      className="inline-flex items-center justify-center rounded-full bg-orange-500 px-5 py-3 text-sm font-bold text-white transition hover:bg-orange-600"
+                    >
+                      تماس با {branch.name}
+                    </a>
+                  </div>
+                </article>
+              );
+            })}
           </div>
         </section>
 
@@ -256,6 +456,18 @@ export default async function HomePage() {
         </section>
       </main>
       <SiteFooter settings={data.settings} />
+      <div className="h-20 md:hidden" aria-hidden="true" />
+      <a
+        href={`tel:${TEHRAN_BRANCH_PHONES["غرب"]}`}
+        aria-label={`تماس با شعبه غرب تهران، ${TEHRAN_BRANCH_PHONES["غرب"]}`}
+        className="fixed inset-x-0 bottom-0 z-50 flex items-center justify-between gap-4 border-t border-slate-200 bg-white px-4 py-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] shadow-[0_-8px_24px_rgba(15,23,42,0.12)] md:hidden"
+      >
+        <span className="text-sm font-black text-slate-900">شعبه غرب تهران</span>
+        <span dir="ltr" className="text-sm font-bold text-orange-600">{TEHRAN_BRANCH_PHONES["غرب"]}</span>
+        <span className="shrink-0 rounded-full bg-orange-500 px-4 py-2 text-xs font-bold text-white">
+          تماس
+        </span>
+      </a>
     </>
   );
 }

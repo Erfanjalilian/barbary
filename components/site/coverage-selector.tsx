@@ -112,7 +112,7 @@ export function CoverageSelector({ variant = "dropdown", className = "", phone }
                 onClick={() => setSelectedArea((current) => current === "گیلان" ? null : "گیلان")}
                 className="flex w-full items-center justify-between bg-slate-50 px-3 py-3 text-right text-sm font-bold text-slate-700 hover:bg-orange-50"
               >
-                <span>گیلان</span>
+                <span>گیلان و مازندران</span>
                 <ArrowDown className={`h-4 w-4 transition-transform duration-200 ${selectedArea === "گیلان" ? "rotate-180" : ""}`} />
               </button>
               {selectedArea === "گیلان" && (
@@ -121,7 +121,7 @@ export function CoverageSelector({ variant = "dropdown", className = "", phone }
                   className="flex items-center justify-center gap-2 border-t border-slate-200 px-3 py-3 text-sm font-bold text-orange-600"
                 >
                   <Phone className="h-4 w-4" />
-                  تماس با گیلان: {GILAN_PHONE}
+                  تماس با گیلان و مازندران: {GILAN_PHONE}
                 </a>
               )}
             </div>
@@ -153,7 +153,7 @@ export function CoverageSelector({ variant = "dropdown", className = "", phone }
             {selectedTehranArea
               ? "محله‌های این محدوده را انتخاب کنید."
               : selectedArea === "گیلان"
-                ? "برای تماس با گیلان از شمارهٔ زیر استفاده کنید."
+                ? "برای تماس با گیلان و مازندران از شمارهٔ زیر استفاده کنید."
                 : "یکی از مناطق زیر را برای مشاهدهٔ جزئیات انتخاب کنید."}
           </p>
         </div>
@@ -198,7 +198,7 @@ export function CoverageSelector({ variant = "dropdown", className = "", phone }
             onClick={() => setSelectedArea("گیلان")}
             className="rounded-xl border border-slate-200 px-3 py-3 text-right text-sm font-bold text-slate-700 transition hover:border-orange-300 hover:bg-orange-50 hover:text-orange-700"
           >
-            گیلان
+            گیلان و مازندران
           </button>
         </div>
       )}
@@ -248,7 +248,7 @@ export function CoverageSelector({ variant = "dropdown", className = "", phone }
           className="mt-5 flex items-center justify-center gap-2 rounded-xl bg-orange-500 px-4 py-3 text-sm font-bold text-white transition hover:bg-orange-600"
         >
           <Phone className="h-4 w-4" />
-          تماس با گیلان: {GILAN_PHONE}
+          تماس با گیلان و مازندران: {GILAN_PHONE}
         </a>
       )}
 

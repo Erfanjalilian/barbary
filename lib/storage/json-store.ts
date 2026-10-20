@@ -8,15 +8,15 @@ const seedData = {
     siteName: "خانه‌ساز اسباب‌کشی",
     shortIntro:
       "شرکت حرفه‌ای جابه‌جایی و اسباب‌کشی منزل با تیم مجرب، بسته‌بندی اصولی و حمل‌ونقل امن.",
-    phone: "+989121234567",
-    secondaryPhones: ["+989121234568"],
-    address: "تهران، خیابان ولیعصر، نبش کوچه ۱۲",
+    phone: "02126210683",
+    secondaryPhones: ["09115742824"],
+    address: "شهرک غرب، بلوار مهستان، پلاک ۵",
     businessHours: "شنبه تا پنج‌شنبه، ۸:۰۰ تا ۲۰:۰۰",
     footerText: "با خیال راحت وسایل خود را به خانه جدید منتقل کنید.",
     socialLinks: {
       instagram: "https://instagram.com",
       telegram: "https://t.me",
-      whatsapp: "https://wa.me/989121234567",
+      whatsapp: "https://wa.me/989115742824",
     },
     heroTitle: "اسباب‌کشی آسان، مطمئن و حرفه‌ای",
     heroDescription:
