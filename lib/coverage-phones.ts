@@ -5,7 +5,7 @@ export const GILAN_PHONE = "09115742824";
 export const TEHRAN_BRANCH_PHONES: Record<TehranBranchDirection, string> = {
   شمال: "02126210683",
   جنوب: "02634200766",
-  شرق: "02186095100",
+  شرق: "02634200766",
   غرب: "02144387002",
   مرکز: "02188281009",
 };

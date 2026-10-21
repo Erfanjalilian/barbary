@@ -249,7 +249,7 @@ export default async function HomePage() {
                 </a>
               </div>
               <div className="mt-8 flex flex-wrap items-center gap-5 text-sm text-white/85">
-                <a href={`tel:${TEHRAN_BRANCH_PHONES["مرکز"]}`} className="flex items-center gap-2 font-bold text-orange-200 transition hover:text-orange-100">
+                <a href={`tel:${TEHRAN_BRANCH_PHONES["مرکز"]}`} className="flex items-center gap-2 text-[28px] font-bold leading-tight text-orange-200 transition hover:text-orange-100">
                   <PhoneCall className="h-5 w-5 text-orange-300" />
                   خط ویژه ۱۰۰۹
                 </a>
