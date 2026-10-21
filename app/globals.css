@@ -46,3 +46,29 @@ img {
     text-wrap: balance;
   }
 }
+
+@keyframes special-phone-color {
+  0%,
+  100% {
+    color: #fed7aa;
+  }
+
+  33% {
+    color: #fef08a;
+  }
+
+  66% {
+    color: #fda4af;
+  }
+}
+
+.animate-special-phone {
+  animation: special-phone-color 1.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-special-phone {
+    animation: none;
+    color: #fed7aa;
+  }
+}

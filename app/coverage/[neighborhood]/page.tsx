@@ -36,7 +36,6 @@ const neighborhoodBranches = [
   { name: "شمال تهران", phone: TEHRAN_BRANCH_PHONES["شمال"] },
   { name: "غرب تهران", phone: TEHRAN_BRANCH_PHONES["غرب"] },
   { name: "مرکز تهران", phone: TEHRAN_BRANCH_PHONES["مرکز"] },
-  { name: "شرق تهران", phone: TEHRAN_BRANCH_PHONES["شرق"] },
 ];
 
 const portfolioImages = [

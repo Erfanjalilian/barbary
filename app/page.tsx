@@ -67,48 +67,6 @@ const branchContacts = [
     ],
   },
   {
-    name: "شعبه شرق تهران",
-    phone: TEHRAN_BRANCH_PHONES["شرق"],
-    number: TEHRAN_BRANCH_PHONES["شرق"],
-    neighborhoods: [
-      "پیروزی",
-      "تهران پارس",
-      "هروی",
-      "حکیمیه",
-      "رسالت",
-      "هنگام",
-      "ساقدوش",
-      "تهران نو",
-      "شمیران نو",
-      "دلاوران",
-      "سراج",
-      "استخر",
-      "افسریه",
-      "مسعودیه",
-      "دماوند",
-      "چهارراه تلفنخانه",
-      "امام حسین",
-      "هفت حوض",
-      "لویزان",
-      "قاسم آباد",
-      "تسلیحات",
-      "وحیدیه",
-      "پدر ثانی",
-      "اصفهانک",
-      "حشمتیه",
-      "نارمک",
-      "خاک سفید",
-      "سرخه حصار",
-      "شمس آباد",
-      "مجیدیه",
-      "قنات کوثر",
-      "نظام آباد",
-      "شهید محلاتی",
-      "بسیج",
-      "حقانی",
-    ],
-  },
-  {
     name: "شعبه مرکز تهران",
     phone: TEHRAN_BRANCH_PHONES["مرکز"],
     number: TEHRAN_BRANCH_PHONES["مرکز"],
@@ -249,7 +207,7 @@ export default async function HomePage() {
                 </a>
               </div>
               <div className="mt-8 flex flex-wrap items-center gap-5 text-sm text-white/85">
-                <a href={`tel:${TEHRAN_BRANCH_PHONES["مرکز"]}`} className="flex items-center gap-2 text-[28px] font-bold leading-tight text-orange-200 transition hover:text-orange-100">
+                <a href={`tel:${TEHRAN_BRANCH_PHONES["مرکز"]}`} className="animate-special-phone flex items-center gap-2 text-[36px] font-bold leading-tight transition">
                   <PhoneCall className="h-5 w-5 text-orange-300" />
                   خط ویژه ۱۰۰۹
                 </a>

@@ -153,7 +153,6 @@ export function PortfolioCard({ item }: { item: PortfolioItem }) {
 export function SiteFooter({ settings }: { settings: SiteSettings }) {
   const quickContacts = [
     { label: "شمال تهران", phone: getCoveragePhone("تهران", "شمال", settings.phone) },
-    { label: "شرق تهران", phone: TEHRAN_BRANCH_PHONES["شرق"] },
     { label: "جنوب تهران", phone: getCoveragePhone("تهران", "جنوب", settings.phone) },
     { label: "غرب تهران", phone: TEHRAN_BRANCH_PHONES["غرب"] },
     { label: "مازندران", phone: GILAN_PHONE },
@@ -164,14 +163,13 @@ export function SiteFooter({ settings }: { settings: SiteSettings }) {
       <footer className="border-t border-slate-200 bg-slate-900 text-slate-200">
         <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 md:grid-cols-3 lg:px-8">
           <div>
-            <div className="mb-4 text-xl font-black text-white">{settings.siteName}</div>
+            <div className="mb-4 text-xl font-black text-white">باربری آنلاین</div>
             <p className="text-sm leading-7 text-slate-300">{settings.footerText}</p>
           </div>
 
           <div>
             <h3 className="mb-4 text-lg font-bold text-white">پیوندها</h3>
             <div className="space-y-2 text-sm text-slate-300">
-              <Link href="/" className="block">صفحه اصلی</Link>
               <Link href="/coverage" className="block">مناطق تحت پوشش</Link>
               <Link href="/about" className="block">درباره ما</Link>
               <Link href="/packing" className="block">بسته‌بندی</Link>
@@ -188,10 +186,17 @@ export function SiteFooter({ settings }: { settings: SiteSettings }) {
             </div>
           </div>
         </div>
+        <div className="border-t border-slate-700 px-4 py-4 text-center text-sm text-slate-300">
+          <span>طراحی سایت توسط عرفان جلیلیان</span>
+          <span className="mx-2 text-slate-500">|</span>
+          <a href="tel:09213570389" className="transition hover:text-white">
+            09213570389
+          </a>
+        </div>
       </footer>
       <nav
         aria-label="تماس با مناطق"
-        className="fixed inset-x-0 bottom-0 z-50 grid grid-cols-5 border-t border-slate-200 bg-white/95 px-1 pt-2 shadow-[0_-8px_24px_rgba(15,23,42,0.12)] backdrop-blur lg:hidden"
+        className="fixed inset-x-0 bottom-0 z-50 grid grid-cols-4 gap-1 border-t border-slate-200 bg-white/95 px-2 pt-2 shadow-[0_-8px_24px_rgba(15,23,42,0.12)] backdrop-blur lg:hidden"
         style={{ paddingBottom: "max(0.5rem, env(safe-area-inset-bottom))" }}
       >
         {quickContacts.map(({ label, phone }) => (
@@ -199,7 +204,7 @@ export function SiteFooter({ settings }: { settings: SiteSettings }) {
             key={label}
             href={`tel:${phone}`}
             aria-label={`تماس با ${label}`}
-            className="flex min-w-0 flex-col items-center justify-center gap-1 rounded-lg px-0.5 py-1 text-center text-xs font-bold leading-tight text-slate-700 transition hover:text-orange-600 focus-visible:outline-2 focus-visible:outline-orange-500"
+            className="flex min-w-0 flex-col items-center justify-center gap-1 rounded-lg px-1 py-1 text-center text-xs font-bold leading-tight text-slate-700 transition hover:text-orange-600 focus-visible:outline-2 focus-visible:outline-orange-500"
           >
             <PhoneCall className="h-5 w-5 shrink-0 text-orange-500" />
             <span>{label}</span>
