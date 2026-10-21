@@ -67,6 +67,48 @@ const branchContacts = [
     ],
   },
   {
+    name: "شعبه شرق تهران",
+    phone: TEHRAN_BRANCH_PHONES["شرق"],
+    number: TEHRAN_BRANCH_PHONES["شرق"],
+    neighborhoods: [
+      "پیروزی",
+      "تهران پارس",
+      "هروی",
+      "حکیمیه",
+      "رسالت",
+      "هنگام",
+      "ساقدوش",
+      "تهران نو",
+      "شمیران نو",
+      "دلاوران",
+      "سراج",
+      "استخر",
+      "افسریه",
+      "مسعودیه",
+      "دماوند",
+      "چهارراه تلفنخانه",
+      "امام حسین",
+      "هفت حوض",
+      "لویزان",
+      "قاسم آباد",
+      "تسلیحات",
+      "وحیدیه",
+      "پدر ثانی",
+      "اصفهانک",
+      "حشمتیه",
+      "نارمک",
+      "خاک سفید",
+      "سرخه حصار",
+      "شمس آباد",
+      "مجیدیه",
+      "قنات کوثر",
+      "نظام آباد",
+      "شهید محلاتی",
+      "بسیج",
+      "حقانی",
+    ],
+  },
+  {
     name: "شعبه مرکز تهران",
     phone: TEHRAN_BRANCH_PHONES["مرکز"],
     number: TEHRAN_BRANCH_PHONES["مرکز"],
@@ -133,6 +175,15 @@ const branchContacts = [
       "سرو آزاد",
       "کرج",
     ],
+  },
+];
+
+const branchPhoneContacts = [
+  ...branchContacts.map(({ name, phone, number }) => ({ name, phone, number })),
+  {
+    name: "شعبه مازندران",
+    phone: GILAN_PHONE,
+    number: GILAN_PHONE,
   },
 ];
 
@@ -247,7 +298,7 @@ export default async function HomePage() {
           <div className="mx-auto max-w-7xl px-4 lg:px-8">
             <SectionHeading title="شماره شعبه‌ها" description="برای تماس سریع با شعبه موردنظر، روی دکمه مربوطه کلیک کنید." />
             <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-              {branchContacts.map((branch) => (
+              {branchPhoneContacts.map((branch) => (
                 <div key={branch.name} className="rounded-[28px] border border-white/20 bg-orange-600/20 p-5 shadow-[0_20px_40px_rgba(194,65,12,0.18)] backdrop-blur-sm">
                   <p className="text-lg font-black text-white">{branch.name}</p>
                   <p className="mt-3 text-base font-medium text-orange-50">{branch.number}</p>
@@ -393,7 +444,7 @@ export default async function HomePage() {
               </p>
             </div>
             <div className="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
-              {branchContacts.map((branch) => (
+              {branchPhoneContacts.map((branch) => (
                 <a
                   key={branch.name}
                   href={`tel:${branch.phone}`}
