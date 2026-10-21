@@ -3,7 +3,7 @@ import Image from "next/image";
 import { MapPinned, Phone, PhoneCall, ShieldCheck, Sparkles } from "lucide-react";
 import type { SiteSettings, ServiceItem, AdvantageItem, PortfolioItem, CoverageArea } from "@/types/site";
 import { CoverageSelector } from "@/components/site/coverage-selector";
-import { GILAN_PHONE, getCoveragePhone } from "@/lib/coverage-phones";
+import { GILAN_PHONE, getCoveragePhone, TEHRAN_BRANCH_PHONES } from "@/lib/coverage-phones";
 
 export function SiteHeader({ settings }: { settings: SiteSettings }) {
   const nav = [
@@ -152,10 +152,11 @@ export function PortfolioCard({ item }: { item: PortfolioItem }) {
 
 export function SiteFooter({ settings }: { settings: SiteSettings }) {
   const quickContacts = [
-    { label: "مرکز تهران", phone: getCoveragePhone("تهران", "مرکز", settings.phone) },
     { label: "شمال تهران", phone: getCoveragePhone("تهران", "شمال", settings.phone) },
+    { label: "شرق تهران", phone: TEHRAN_BRANCH_PHONES["شرق"] },
     { label: "جنوب تهران", phone: getCoveragePhone("تهران", "جنوب", settings.phone) },
-    { label: "گیلان و مازندران", phone: GILAN_PHONE },
+    { label: "غرب تهران", phone: TEHRAN_BRANCH_PHONES["غرب"] },
+    { label: "مازندران", phone: GILAN_PHONE },
   ];
 
   return (
@@ -190,7 +191,7 @@ export function SiteFooter({ settings }: { settings: SiteSettings }) {
       </footer>
       <nav
         aria-label="تماس با مناطق"
-        className="fixed inset-x-0 bottom-0 z-50 grid grid-cols-4 border-t border-slate-200 bg-white/95 px-1 pt-2 shadow-[0_-8px_24px_rgba(15,23,42,0.12)] backdrop-blur lg:hidden"
+        className="fixed inset-x-0 bottom-0 z-50 grid grid-cols-5 border-t border-slate-200 bg-white/95 px-1 pt-2 shadow-[0_-8px_24px_rgba(15,23,42,0.12)] backdrop-blur lg:hidden"
         style={{ paddingBottom: "max(0.5rem, env(safe-area-inset-bottom))" }}
       >
         {quickContacts.map(({ label, phone }) => (

@@ -456,18 +456,6 @@ export default async function HomePage() {
         </section>
       </main>
       <SiteFooter settings={data.settings} />
-      <div className="h-20 md:hidden" aria-hidden="true" />
-      <a
-        href={`tel:${TEHRAN_BRANCH_PHONES["غرب"]}`}
-        aria-label={`تماس با شعبه غرب تهران، ${TEHRAN_BRANCH_PHONES["غرب"]}`}
-        className="fixed inset-x-0 bottom-0 z-50 flex items-center justify-between gap-4 border-t border-slate-200 bg-white px-4 py-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] shadow-[0_-8px_24px_rgba(15,23,42,0.12)] md:hidden"
-      >
-        <span className="text-sm font-black text-slate-900">شعبه غرب تهران</span>
-        <span dir="ltr" className="text-sm font-bold text-orange-600">{TEHRAN_BRANCH_PHONES["غرب"]}</span>
-        <span className="shrink-0 rounded-full bg-orange-500 px-4 py-2 text-xs font-bold text-white">
-          تماس
-        </span>
-      </a>
     </>
   );
 }
