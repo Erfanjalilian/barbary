@@ -188,11 +188,15 @@ export function SiteFooter({ settings }: { settings: SiteSettings }) {
           </div>
         </div>
         <div className="border-t border-slate-700 px-4 py-4 text-center text-sm text-slate-300">
-          <span>طراحی سایت توسط عرفان جلیلیان</span>
+          <span>مدیر پروژه مهدی شم آبادی </span>
           <span className="mx-2 text-slate-500">|</span>
-          <a href="tel:09213570389" className="transition hover:text-white">
-            09213570389
+          <a href="tel: 09124541307" className="transition hover:text-white">
+            09124541307
           </a>
+        </div>
+        <div className="border-t border-slate-700 px-4 py-4 text-center text-sm text-slate-300">
+          <span>طراح سایت عرفان جلیلیان</span>
+          
         </div>
       </footer>
       <nav
